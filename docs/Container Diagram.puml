@@ -1,0 +1,43 @@
+@startuml
+
+!include <C4/C4_Container>
+
+LAYOUT_WITH_LEGEND()
+
+Person(user, "User", "Hobbyist, Maker, or Shop Technician using the system")
+
+System_Boundary(gt, "Garage Time!") {
+
+    Container_Boundary(api, "Backend Services") {
+        Container(apiGateway, "API Gateway", "ASP.NET Core", "Exposes GraphQL to frontend, routes requests to services, handles auth")
+        Container(projectSvc, "Project Service", "ASP.NET Core (REST)", "CRUD for all project types (repairs, golf carts, woodworking, electronics)")
+        Container(inventorySvc, "Inventory Service", "Go (REST)", "Manages parts, materials, and tools inventory. Emits events like StockLow")
+        Container(diagnosticsSvc, "Diagnostics Service", "Python (gRPC)", "Advisors for troubleshooting (engines, golf carts, electrical, etc.)")
+        Container(notificationSvc, "Notification Service", "Go/.NET (Event-driven)", "Sends emails, SMS, or push notifications based on project events")
+    }
+
+    Container(frontend, "Frontend", "React + GraphQL", "User dashboard for projects, inventory, analytics")
+
+    ContainerDb(relDB, "Relational Database", "Postgres/SQL Server", "Stores users, projects, tasks, inventory, customers")
+    ContainerDb(noSql, "NoSQL Store", "MongoDB/Redis", "Stores event logs, analytics cache, streaming data")
+    ContainerDb(eventBus, "Event Bus", "Kafka/Azure Event Hub", "Publishes and consumes system events")
+}
+
+Rel(user, frontend, "Uses")
+Rel(frontend, apiGateway, "GraphQL queries/mutations")
+Rel(apiGateway, projectSvc, "Routes REST calls")
+Rel(apiGateway, inventorySvc, "Routes REST calls")
+Rel(apiGateway, diagnosticsSvc, "Routes gRPC calls")
+
+Rel(projectSvc, relDB, "Reads/Writes")
+Rel(inventorySvc, relDB, "Reads/Writes")
+Rel(diagnosticsSvc, relDB, "Reads historical project data")
+Rel(notificationSvc, noSql, "Reads/Writes events cache")
+
+Rel(projectSvc, eventBus, "Publishes project events")
+Rel(inventorySvc, eventBus, "Publishes stock events")
+Rel(eventBus, notificationSvc, "Notifies on events")
+Rel(eventBus, diagnosticsSvc, "Updates issue frequency")
+Rel(eventBus, noSql, "Stores logs/analytics")
+
+@enduml
