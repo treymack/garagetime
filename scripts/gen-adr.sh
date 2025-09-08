@@ -3,4 +3,4 @@
 set -e
 
 pushd "$(dirname "$0")/.."
-adr generate toc > ./doc/adr/index.md
+adr generate toc > ./doc/adr/README.md

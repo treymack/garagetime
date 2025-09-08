@@ -16,4 +16,4 @@ I do need to keep costs down though, so this will be implemented using services 
 
 ## 🧩 Architecture Overview
 
-[Architecture Decision Records](./doc/adr/index.md)
+[Architecture Decision Records](./doc/adr/README.md)
