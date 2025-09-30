@@ -1,4 +1,4 @@
-# 1. Record architecture decisions
+# ADR 1: Record architecture decisions
 
 Date: 2025-09-06
 
