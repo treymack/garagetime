@@ -10,6 +10,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Documentation only — specifically Architecture Decision Records. The `src/` directory is not in use.
 
+## Decision-Making Guidance
+
+Most implementation decisions are driven by PRDs. ADRs govern architectural choices — when making decisions that touch technology selection, structural patterns, or cross-cutting concerns, consult the ADRs in `doc/adr/` first and respect their outcomes.
+
 ## Architecture Decision Records
 
 ADRs live in `doc/adr/`, with the index at `doc/adr/README.md` and the custom template at `doc/adr/templates/template.md`.
