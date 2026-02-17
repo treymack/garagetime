@@ -22,6 +22,8 @@ When the user says "ship it":
 4. If an open (unmerged) PR already exists, update it (push the branch)
 
 Never ship to `main` directly and never reopen or push to a merged PR.
+No extra attribution like "🤖 Generated with Claude Code". It's assumed.
+No extra author from the agent side.
 
 ## Decision-Making Guidance
 
