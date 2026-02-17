@@ -10,6 +10,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Documentation only — specifically Architecture Decision Records. The `src/` directory is not in use.
 
+## Workflows
+
+### "Ship it"
+
+When the user says "ship it":
+
+1. Confirm you are on a branch — not `main`, and not already merged
+2. Commit any local changes
+3. If no open PR exists for the branch, create one with `gh pr create`
+4. If an open (unmerged) PR already exists, update it (push the branch)
+
+Never ship to `main` directly and never reopen or push to a merged PR.
+
 ## Decision-Making Guidance
 
 Most implementation decisions are driven by PRDs. ADRs govern architectural choices — when making decisions that touch technology selection, structural patterns, or cross-cutting concerns, consult the ADRs in `doc/adr/` first and respect their outcomes.
